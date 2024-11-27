@@ -1,40 +1,61 @@
-import { StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Text,
+  KeyboardAvoidingView,
+  ScrollView,
+  ImageBackground,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Tela2 from "./app/Comunicados/Tela2";
-import Perfil from "./app/Perfil/Perfil";
+import Home from "./app/Home/Home";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Comunicado from "./src/components/Comunicado/Comunicado";
-import ButtonComp from "./src/components/ButtonComp/ButtonComp";
-import Footer from "./src/components/Footer/Footer";
 
+function Login() {
+  const [loginData, setLoginData] = useState();
+  const [senhaData, setSenhaData] = useState();
 
-function Home() {
+  const navigation = useNavigation();
+
   return (
-    <SafeAreaProvider>
-      <View style={styles.container}>
-        <View style={styles.acessoRapido}>
-          <ButtonComp
-            name="Comunicados"
-            icon={require("./img/icons/forum.png")}
-            navigate="Tela 2"
-          />
-          <ButtonComp
-            name="Conceitos"
-            icon={require("./img/icons/conceitos.png")}
-          />
-          <ButtonComp
-            name="Disciplinas"
-            icon={require("./img/icons/Disciplinas.png")}
-          />
-          <ButtonComp
-            name="Contatos"
-            icon={require("./img/icons/Disciplinas.png")}
-          />
-        </View>
-        <Comunicado />
-      </View>
-      <Footer />
+    <SafeAreaProvider style={styles.container}>
+      <KeyboardAvoidingView style={styles.container}>
+        <ScrollView>
+          <SafeAreaView style={styles.safeArea}>
+            <Image
+              source={require("./img/mediotec-mobile.png")}
+              style={styles.mediotecLogo}
+            />
+            <Image
+              source={require("./img/Profile-PNG-File.png")}
+              style={styles.userImg}
+            />
+            <TextInput
+              style={styles.inputText}
+              placeholder="Login"
+              value={loginData}
+              onChangeText={setLoginData}
+            />
+            <TextInput
+              style={styles.inputText}
+              placeholder="Senha"
+              secureTextEntry={true}
+              value={senhaData}
+              onChangeText={setSenhaData}
+            />
+            <TouchableOpacity
+              style={styles.buttonEnter}
+              onPress={() => navigation.navigate("Home")}
+            >
+              <Text style={styles.textButton}>Entrar</Text>
+            </TouchableOpacity>
+          </SafeAreaView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaProvider>
   );
 }
@@ -44,19 +65,26 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Login"
       screenOptions={{
         headerStyle: { backgroundColor: "#342EAD" },
         headerTitleStyle: { color: "#ffffff", fontWeight: "300" },
       }}
     >
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ title: "Área do Aluno", headerTitleAlign: "center" }}
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen name="Tela 2" component={Tela2} />
-      <Stack.Screen name="Perfil" component={Perfil} /> 
+      <Stack.Screen 
+        name="Home" 
+        component={Home} 
+        options={{ 
+          headerShown: false,
+          headerLeft: null,
+          gestureEnabled: false,
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -71,17 +99,37 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 5,
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
-  acessoRapido: {
-    display: "flex",
-    flexDirection: "row",
-    gap: 10,
-    marginTop: 5,
-    marginBottom: 10
+  safeArea: {
+    flex: 1,
+    marginTop: 80,
+    alignItems: "center",
+  },
+  inputText: {
+    width: "80%",
+    backgroundColor: "#D4D1D1",
+    padding: 20,
+    borderRadius: 30,
+    marginTop: 20,
+  },
+  mediotecLogo: {
+    width: "60%",
+    height: "28%",
+    margin: 0,
+  },
+  buttonEnter: {
+    backgroundColor: "#F28705",
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderRadius: 30,
+    marginTop: 20,
+  },
+  textButton: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 19,
   },
 });
