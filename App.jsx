@@ -1,13 +1,16 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ButtonComp from "./src/components/ButtonComp/ButtonComp";
-import Comunicado from "./src/components/Comunicado/Comunicado";
 import Tela2 from "./app/Tela2";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Comunicado from "./src/components/Comunicado/Comunicado";
+import ButtonComp from "./src/components/ButtonComp/ButtonComp";
+import Footer from "./src/components/Footer/Footer";
+
 
 function Home() {
   return (
-    <ScrollView>
+    <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.acessoRapido}>
           <ButtonComp
@@ -28,14 +31,10 @@ function Home() {
             icon={require("./img/icons/Disciplinas.png")}
           />
         </View>
-        <View>
-          <Comunicado />
-          <Comunicado />
-          <Comunicado />
-          <Comunicado />
-        </View>
+        <Comunicado />
       </View>
-    </ScrollView>
+      <Footer />
+    </SafeAreaView>
   );
 }
 
@@ -55,10 +54,7 @@ function RootStack() {
         component={Home}
         options={{ title: "Área do Aluno", headerTitleAlign: "center" }}
       />
-      <Stack.Screen 
-        name="Tela 2"
-        component={Tela2}
-        />
+      <Stack.Screen name="Tela 2" component={Tela2} />
     </Stack.Navigator>
   );
 }
@@ -80,7 +76,6 @@ const styles = StyleSheet.create({
   },
   acessoRapido: {
     display: "flex",
-    marginTop: 20,
     flexDirection: "row",
     gap: 10,
   },
