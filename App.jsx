@@ -16,6 +16,16 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 function Login() {
+
+  const usuario = {
+    nome: "Rodrigo",
+    senha: "12345",
+    email: "rodrigo@email.com"
+  }
+
+  const senhaSegura = usuario.senha.split("").map(() => "*").join("");
+
+
   const [loginData, setLoginData] = useState();
   const [senhaData, setSenhaData] = useState();
 
