@@ -1,8 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Tela2 from "./app/Tela2";
-import { SafeAreaView } from "react-native-safe-area-context";
+import Tela2 from "./app/Comunicados/Tela2";
+import Perfil from "./app/Perfil/Perfil";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Comunicado from "./src/components/Comunicado/Comunicado";
 import ButtonComp from "./src/components/ButtonComp/ButtonComp";
 import Footer from "./src/components/Footer/Footer";
@@ -10,7 +11,7 @@ import Footer from "./src/components/Footer/Footer";
 
 function Home() {
   return (
-    <SafeAreaView>
+    <SafeAreaProvider>
       <View style={styles.container}>
         <View style={styles.acessoRapido}>
           <ButtonComp
@@ -34,7 +35,7 @@ function Home() {
         <Comunicado />
       </View>
       <Footer />
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
@@ -55,6 +56,7 @@ function RootStack() {
         options={{ title: "Área do Aluno", headerTitleAlign: "center" }}
       />
       <Stack.Screen name="Tela 2" component={Tela2} />
+      <Stack.Screen name="Perfil" component={Perfil} /> 
     </Stack.Navigator>
   );
 }
@@ -69,6 +71,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 5,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
@@ -78,5 +81,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     gap: 10,
+    marginTop: 5,
+    marginBottom: 10
   },
 });

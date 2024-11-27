@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import ButtonComp from "../ButtonComp/ButtonComp";
+import Perfil from "../../../app/Perfil/Perfil";
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
       <ButtonComp name="Início" />
       <ButtonComp name="Comunicados" />
       <ButtonComp name="Contatos" />
-      <ButtonComp name="Perfil" />
+      <ButtonComp name="Perfil" navigate={Perfil} />
     </View>
   );
 };
@@ -21,7 +22,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
     backgroundColor: "#342EAD",
-    position: "absolute",
-    top: 677
   },
 });

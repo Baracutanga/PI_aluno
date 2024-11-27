@@ -4,7 +4,7 @@ import React from 'react'
 const Tela2 = () => {
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
-      <Image source={require('../img/mediotec-mobile.png')} style={{ width: 300, height: 120 }} />
+      <Image source={require('../../img/mediotec-mobile.png')} style={{ width: 300, height: 120 }} />
     </View>
   )
 }

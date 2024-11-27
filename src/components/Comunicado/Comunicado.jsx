@@ -112,29 +112,32 @@ const Item = ({ titulo, conteudo }) => {
 
 const Comunicado = () => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, width: "100%" }}>
+      <SafeAreaView style={styles.safeArea}>
         <FlatList
           data={comunicados}
           renderItem={({ item }) => (
             <Item titulo={item.titulo} conteudo={item.conteudo} />
           )}
           keyExtractor={(item) => item.id.toString()}
+          showsVerticalScrollIndicator={false}
         />
       </SafeAreaView>
-    </SafeAreaProvider>
   );
 };
 
 export default Comunicado;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    overflow: "hidden"
+  },
   comunicadoContainer: {
     flex: 1,
     width: 300,
     marginTop: 10,
     backgroundColor: "#fff",
-    paddingBottom: 10,
+    paddingBottom: 30,
     marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 10 },
@@ -165,7 +168,7 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 5,
     position: "absolute",
-    bottom: 10,
+    bottom: 5,
     right: 10,
   },
   TextButton: {
