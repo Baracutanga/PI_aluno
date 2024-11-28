@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Tela2 from "../Comunicados/Tela2";
+import Comunicados from "../Comunicados/Comunicados";
 import Perfil from "../Perfil/Perfil";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Comunicado from "../../src/components/Comunicado/Comunicado";
@@ -55,7 +55,7 @@ export default function RootStack() {
         component={HomeScreen}
         options={{ title: "Área do Aluno", headerTitleAlign: "center" }}
       />
-      <Stack.Screen name="Tela 2" component={Tela2} />
+      <Stack.Screen name="Comunicados" component={Comunicados} />
       <Stack.Screen name="Perfil" component={Perfil} /> 
     </Stack.Navigator>
   );
