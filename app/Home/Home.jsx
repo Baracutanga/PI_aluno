@@ -1,23 +1,22 @@
 import { StyleSheet, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Tela2 from "../Comunicados/Tela2";
 import Perfil from "../Perfil/Perfil";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Comunicado from "../../src/components/Comunicado/Comunicado";
+import Comunicados from "../Comunicados/Comunicados";
 import ButtonComp from "../../src/components/ButtonComp/ButtonComp";
 import Footer from "../../src/components/Footer/Footer";
-
+import Comunicado from "../../src/components/Comunicado/Comunicado";
+import Contatos from "../Contatos/Contatos";
 
 function HomeScreen() {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.acessoRapido}>
           <ButtonComp
             name="Comunicados"
             icon={require("../../img/icons/forum.png")}
-            navigate="Tela 2"
+            navigate="Comunicados"
           />
           <ButtonComp
             name="Conceitos"
@@ -30,6 +29,7 @@ function HomeScreen() {
           <ButtonComp
             name="Contatos"
             icon={require("../../img/icons/Disciplinas.png")}
+            navigate="Contatos"
           />
         </View>
         <Comunicado />
@@ -41,7 +41,7 @@ function HomeScreen() {
 
 const Stack = createNativeStackNavigator();
 
-export default function RootStack() {
+export default function HomeScreenRoot() {
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -55,8 +55,9 @@ export default function RootStack() {
         component={HomeScreen}
         options={{ title: "Área do Aluno", headerTitleAlign: "center" }}
       />
-      <Stack.Screen name="Tela 2" component={Tela2} />
-      <Stack.Screen name="Perfil" component={Perfil} /> 
+      <Stack.Screen name="Comunicados" component={Comunicados} />
+      <Stack.Screen name="Perfil" component={Perfil} />
+      <Stack.Screen name="Contatos" component={Contatos} />
     </Stack.Navigator>
   );
 }
@@ -74,6 +75,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     marginTop: 5,
-    marginBottom: 10
+    marginBottom: 10,
   },
 });
