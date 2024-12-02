@@ -1,34 +1,49 @@
-import { StyleSheet, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet, View, BackHandler, Alert } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Tela2 from "../Comunicados/Tela2";
 import Perfil from "../Perfil/Perfil";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Comunicado from "../../src/components/Comunicado/Comunicado";
+import { useEffect } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import Comunicados from "../Comunicados/Comunicados";
 import ButtonComp from "../../src/components/ButtonComp/ButtonComp";
 import Footer from "../../src/components/Footer/Footer";
-
+import Comunicado from "../../src/components/Comunicado/Comunicado";
+import Contatos from "../Contatos/Contatos";
+import Conceitos from "../Conceitos/Conceitos";
+import { useIsFocused } from "@react-navigation/native";
 
 function HomeScreen() {
+  const isFocused = useIsFocused(); 
+
+  useEffect(() => {
+    const onBackPress = () => {
+      if (isFocused) {
+        
+        BackHandler.exitApp();
+        return true; 
+      }
+      return false; 
+    };
+
+    
+    BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+    
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    };
+  }, [isFocused]);
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.acessoRapido}>
           <ButtonComp
-            name="Comunicados"
-            icon={require("../../img/icons/forum.png")}
-            navigate="Tela 2"
-          />
-          <ButtonComp
             name="Conceitos"
             icon={require("../../img/icons/conceitos.png")}
+            navigate="Conceitos"
           />
           <ButtonComp
-            name="Disciplinas"
-            icon={require("../../img/icons/Disciplinas.png")}
-          />
-          <ButtonComp
-            name="Contatos"
+            name="Horários"
             icon={require("../../img/icons/Disciplinas.png")}
           />
         </View>
@@ -41,22 +56,28 @@ function HomeScreen() {
 
 const Stack = createNativeStackNavigator();
 
-export default function RootStack() {
+export default function HomeScreenRoot() {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeScreenRoot"
       screenOptions={{
-        headerStyle: { backgroundColor: "#342EAD" },
-        headerTitleStyle: { color: "#ffffff", fontWeight: "300" },
+        headerStyle: { backgroundColor: "#342EAD", },
+        headerTitleStyle: { color: "#ffffff", fontWeight: "300", },
       }}
     >
       <Stack.Screen
-        name="Home"
+        name="HomeScreenRoot"
         component={HomeScreen}
-        options={{ title: "Área do Aluno", headerTitleAlign: "center" }}
+        options={{
+          title: "Área do Aluno",
+          headerTitleAlign: "center",
+          headerBackVisible: false,
+        }}
       />
-      <Stack.Screen name="Tela 2" component={Tela2} />
-      <Stack.Screen name="Perfil" component={Perfil} /> 
+      <Stack.Screen name="Comunicados" component={Comunicados} />
+      <Stack.Screen name="Perfil" component={Perfil} />
+      <Stack.Screen name="Contatos" component={Contatos} />
+      <Stack.Screen name="Conceitos" component={Conceitos} />
     </Stack.Navigator>
   );
 }
@@ -74,6 +95,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 10,
     marginTop: 5,
-    marginBottom: 10
+    marginBottom: 10,
   },
 });
