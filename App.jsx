@@ -1,3 +1,5 @@
+// import 'react-native-reanimated';
+// import 'react-native-gesture-handler';
 import {
   StyleSheet,
   TextInput,
@@ -6,16 +8,16 @@ import {
   Text,
   KeyboardAvoidingView,
   ScrollView,
-  ImageBackground,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./app/Home/Home";
+import HomeScreenRoot from "./app/Home/Home";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 function Login() {
+
   const [loginData, setLoginData] = useState();
   const [senhaData, setSenhaData] = useState();
 
@@ -49,7 +51,7 @@ function Login() {
             />
             <TouchableOpacity
               style={styles.buttonEnter}
-              onPress={() => navigation.navigate("Home")}
+              onPress={() => navigation.navigate("HomeScreen")}
             >
               <Text style={styles.textButton}>Entrar</Text>
             </TouchableOpacity>
@@ -77,8 +79,8 @@ function RootStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen 
-        name="Home" 
-        component={Home} 
+        name="HomeScreen" 
+        component={HomeScreenRoot} 
         options={{ 
           headerShown: false,
           headerLeft: null,
