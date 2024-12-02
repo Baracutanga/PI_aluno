@@ -34,7 +34,3 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-
-# coisas desnecessarias
-objetos
-ex.jsx
