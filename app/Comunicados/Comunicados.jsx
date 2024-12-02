@@ -2,19 +2,11 @@ import * as React from "react";
 import { ScrollView, StyleSheet, View, Text, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
-const ListItem = ({ name, subject }) => (
-  <View style={styles.listItem}>
-    <View style={styles.itemContent}>
-      <Text style={styles.name}>{name}</Text>
-      <Text style={styles.subject}>{subject}</Text>
-    </View>
-    <View style={styles.statusContainer}>
-      <Text style={styles.status}>Lido</Text>
-    </View>
-  </View>
-);
+const handlePress = (event) => {
+  event.stopPropagation();
+};
 
-const Comunicados = () => {
+const Comunicados = ({ name, subject }) => {
   const data = [
     { name: "Lucas Moreira", subject: "História" },
     { name: "Sofia Nogueira", subject: "Português" },
@@ -24,22 +16,15 @@ const Comunicados = () => {
   ];
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Comunicados</Text>
+    <View style={styles.listItem} onTouchStart={handlePress}>
+      <View style={styles.itemContent}>
+        <Text style={styles.name}>{data.at(0).name}</Text>
+        <Text style={styles.subject}>{data.at(0).subject}</Text>
+        <View style={styles.statusContainer}>
+          <Text style={styles.status}>Lido</Text>
+        </View>
       </View>
-      <View style={styles.list}>
-        {data.map((item, index) => (
-          <ListItem key={index} name={item.name} subject={item.subject} />
-        ))}
-      </View>
-      <LinearGradient
-        style={styles.gradient}
-        colors={["rgba(217, 217, 217, 0)", "rgba(115, 115, 115, 0.6)"]}
-        useAngle
-        angle={180}
-      />
-    </ScrollView>
+    </View>
   );
 };
 

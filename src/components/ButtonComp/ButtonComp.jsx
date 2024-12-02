@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
     height: 80,
   },
   buttonImage: {
-    width: 27,
-    height: 25,
+    width: 23,
+    height: 23,
   },
   textButton: {
     color: "#fff",
