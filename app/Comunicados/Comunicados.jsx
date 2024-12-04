@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ScrollView, StyleSheet, View, Text, Image } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { SafeAreaView } from "react-native";
 
 const ListItem = ({ name, subject }) => (
   <View style={styles.listItem}>
@@ -24,6 +25,7 @@ const Comunicados = () => {
   ];
 
   return (
+    <SafeAreaView style={{ flex: 1 }}>
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Comunicados</Text>
@@ -40,6 +42,7 @@ const Comunicados = () => {
         angle={180}
       />
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
