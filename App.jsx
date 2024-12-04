@@ -67,7 +67,7 @@ const Stack = createNativeStackNavigator();
 function RootStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="HomeScreen"
       screenOptions={{
         headerStyle: { backgroundColor: "#342EAD" },
         headerTitleStyle: { color: "#ffffff", fontWeight: "300" },

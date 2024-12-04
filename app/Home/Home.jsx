@@ -9,6 +9,7 @@ import Footer from "../../src/components/Footer/Footer";
 import Comunicado from "../../src/components/Comunicado/Comunicado";
 import Contatos from "../Contatos/Contatos";
 import Conceitos from "../Conceitos/Conceitos";
+import Horario from "../Horario/Horario";
 import { useIsFocused } from "@react-navigation/native";
 
 function HomeScreen() {
@@ -45,6 +46,7 @@ function HomeScreen() {
           <ButtonComp
             name="Horários"
             icon={require("../../img/icons/Disciplinas.png")}
+            navigate="Horario"
           />
         </View>
         <Comunicado />
@@ -78,6 +80,7 @@ export default function HomeScreenRoot() {
       <Stack.Screen name="Perfil" component={Perfil} />
       <Stack.Screen name="Contatos" component={Contatos} />
       <Stack.Screen name="Conceitos" component={Conceitos} />
+      <Stack.Screen name="Horario" component={Horario}/>
     </Stack.Navigator>
   );
 }

@@ -61,8 +61,11 @@ const Perfil = () => {
             <Image source={require("../../img/logout_black_24dp 1.png")} />
           </TouchableOpacity>
           <View style={styles.img2}>
-          <Image source={require("../../img/mediotec-mobile.png")} style={{width:"43.5%", height:"34%",}}/>
-        </View>
+            <Image
+              source={require("../../img/mediotec-mobile.png")}
+              style={{ width: "43.5%", height: "34%" }}
+            />
+          </View>
         </View>
       </View>
       <Footer />
