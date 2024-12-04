@@ -1,109 +1,147 @@
-import * as React from "react";
-import { ScrollView, StyleSheet, View, Text, Image } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import { SafeAreaView } from "react-native";
+import React from 'react';
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ListItem = ({ name, subject }) => (
-  <View style={styles.listItem}>
-    <View style={styles.itemContent}>
-      <Text style={styles.name}>{name}</Text>
-      <Text style={styles.subject}>{subject}</Text>
-    </View>
-    <View style={styles.statusContainer}>
-      <Text style={styles.status}>Lido</Text>
-    </View>
-  </View>
-);
-
-const Comunicados = () => {
-  const data = [
-    { name: "Lucas Moreira", subject: "História" },
-    { name: "Sofia Nogueira", subject: "Português" },
-    { name: "Gabriel Costa", subject: "Química" },
-    { name: "Mariana Almeida", subject: "Matemática" },
-    { name: "Felipe Pereira", subject: "Física" },
+export default function Comunicados() {
+  const comunicados = [
+    { id: 1, user: 'Lucas Moreira', disciplina: 'História', notificacoes: 3, avatar: 'https://via.placeholder.com/50' },
+    { id: 2, user: 'Sofia Nogueira', disciplina: 'Português', notificacoes: 5, avatar: 'https://via.placeholder.com/50' },
+    { id: 3, user: 'Ana Silva', disciplina: 'Matemática', notificacoes: 2, avatar: 'https://via.placeholder.com/50' },
+    { id: 4, user: 'Carlos Alberto', disciplina: 'Física', notificacoes: 4, avatar: 'https://via.placeholder.com/50' },
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Comunicados</Text>
+    <View style={styles.container}>
+      {/* Título */}
+      <Text style={styles.title}>Comunicados</Text>
+
+      {/* Barra de Pesquisa */}
+      <View style={styles.searchContainer}>
+        <TextInput style={styles.searchInput} placeholder="Pesquisar Disciplinas..." />
+        <Icon name="search" size={20} color="#666" style={styles.searchIcon} />
       </View>
-      <View style={styles.list}>
-        {data.map((item, index) => (
-          <ListItem key={index} name={item.name} subject={item.subject} />
+
+      {/* Lista de Comunicados */}
+      <ScrollView style={styles.scrollView}>
+        {comunicados.map((item) => (
+          <View key={item.id} style={styles.card}>
+            <Image source={{ uri: item.avatar }} style={styles.avatar} />
+            <View>
+              <Text style={styles.user}>{item.user}</Text>
+              <Text style={styles.disciplina}>{item.disciplina}</Text>
+            </View>
+            <TouchableOpacity style={styles.notificationButton}>
+              <Text style={styles.notificationText}>{item.notificacoes}</Text>
+            </TouchableOpacity>
+          </View>
         ))}
+      </ScrollView>
+
+      {/* Menu Inferior */}
+      <View style={styles.menu}>
+        <TouchableOpacity style={styles.menuItem}>
+          <Icon name="home" size={24} color="#fff" />
+          <Text style={styles.menuText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuItem}>
+          <Icon name="bell" size={24} color="#fff" />
+          <Text style={styles.menuText}>Comunicados</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuItem}>
+          <Icon name="address-book" size={24} color="#fff" />
+          <Text style={styles.menuText}>Contatos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuItem}>
+          <Icon name="user" size={24} color="#fff" />
+          <Text style={styles.menuText}>Perfil</Text>
+        </TouchableOpacity>
       </View>
-      <LinearGradient
-        style={styles.gradient}
-        colors={["rgba(217, 217, 217, 0)", "rgba(115, 115, 115, 0.6)"]}
-        useAngle
-        angle={180}
-      />
-    </ScrollView>
-    </SafeAreaView>
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-  },
-  header: {
-    padding: 16,
-    backgroundColor: "#342ead",
+    backgroundColor: '#F5F5F5',
   },
   title: {
-    fontSize: 20,
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
+    fontSize: 24,
+    fontWeight: 'bold',
+    margin: 20,
   },
-  list: {
-    marginTop: 16,
-    paddingHorizontal: 16,
+  searchContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    marginBottom: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
   },
-  listItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#dcdee7",
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 8,
+  searchInput: {
+    flex: 1,
+    height: 40,
+    fontSize: 16,
   },
-  itemContent: {
+  searchIcon: {
+    marginLeft: 10,
+  },
+  scrollView: {
     flex: 1,
   },
-  name: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "#1e1e1e",
-  },
-  subject: {
-    fontSize: 14,
-    color: "#6b6b6b",
-  },
-  statusContainer: {
-    backgroundColor: "#342ead",
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    marginHorizontal: 20,
+    marginVertical: 10,
+    padding: 15,
     borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
+  },
+  user: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  disciplina: {
+    fontSize: 14,
+    color: '#666',
+  },
+  notificationButton: {
+    marginLeft: 'auto',
+    backgroundColor: '#FF6B6B',
+    borderRadius: 15,
     paddingVertical: 5,
     paddingHorizontal: 10,
   },
-  status: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "bold",
+  notificationText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
-  gradient: {
-    height: 100,
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+  menu: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#333',
+    paddingVertical: 10,
+  },
+  menuItem: {
+    alignItems: 'center',
+  },
+  menuText: {
+    color: '#fff',
+    fontSize: 12,
+    marginTop: 5,
   },
 });
-
-export default Comunicados;

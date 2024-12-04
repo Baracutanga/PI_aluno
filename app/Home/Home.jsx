@@ -17,7 +17,7 @@ function HomeScreen() {
           <ButtonComp
             name="Comunicados"
             icon={require("../../img/icons/forum.png")}
-            navigate="Tela 2"
+            navigate="Comunicados"
           />
           <ButtonComp
             name="Conceitos"
