@@ -9,12 +9,14 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreenRoot from "./app/Home/Home";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import axios from "axios";
 
 function Login() {
 
@@ -22,6 +24,27 @@ function Login() {
   const [senhaData, setSenhaData] = useState();
 
   const navigation = useNavigation();
+
+  function handleLogin() {
+
+    const URL = 'https://backendpi-7ekz.onrender.com/';
+
+    axios.post(`${URL}api/login`, {
+      email: loginData,
+      senha: senhaData,
+    })
+    .then(res => {
+      const token = res.data.token
+
+      if(res.status) {
+        AsyncStorage.setItem('token', token);
+        navigation.navigate("HomeScreen")
+      } else {
+        alert('login inválido.')
+      }
+    })
+    .catch(err => console.error(err))
+  }
 
   return (
     <SafeAreaProvider style={styles.container}>
@@ -51,7 +74,7 @@ function Login() {
             />
             <TouchableOpacity
               style={styles.buttonEnter}
-              onPress={() => navigation.navigate("HomeScreen")}
+              onPress={() => handleLogin()}
             >
               <Text style={styles.textButton}>Entrar</Text>
             </TouchableOpacity>
